@@ -15,10 +15,10 @@ This repository contains a parameterized **Synchronous FIFO (First-In, First-Out
 
 | write_en | fifo_full | read_en | fifo_empty | Vector | Interpretation       
 |----------|-----------|---------|------------|--------|----------------------
-| 1        | 0         | 0       | X          | 2'b10  | Write only           
-| 0        | X         | 1       | 0          | 2'b01  | Read only            
-| 1        | 0         | 1       | 0          | 2'b11  | Write + Read         
-| Any      | 1         | Any     | 1          | 2'b00  | No valid operation (stall) 
+| 1        | 0         | 0       | X          | 2'b10  | Write only(counter increments)           
+| 0        | X         | 1       | 0          | 2'b01  | Read only(counter decrements)           
+| 1        | 0         | 1       | 0          | 2'b11  | Write + Read (counter remains same)        
+| Any      | 1         | Any     | 1          | 2'b00  | No valid operation (counter remains same) 
 
 ## Usage
 
@@ -35,7 +35,7 @@ The FIFO supports standard FIFO operations:
 
 - Implementation of an asynchronous FIFO to handle different clock domains.
 - Additional testbenches and verification.
-- Possible integration with other modules like UART or DSP blocks.
+- Possible integration with other modules like UART.
 
 ---
 
