@@ -27,6 +27,8 @@ The FIFO supports standard FIFO operations:
 - **Read:** Data is output on `data_out` when `read_en` is asserted and FIFO is not empty.
 - `data_counter` provides the current fill level of the FIFO.
 
+> **Note:** The testbench included is *not parameterized*. You will need to manually update the `repeat` parameter and other testbench values according to the FIFO depth and data width settings.
+
 ## Output Waveform
 ![Synchronous FIFO Output](results/sync_fifo_output.png)
 
