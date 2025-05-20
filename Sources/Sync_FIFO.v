@@ -14,7 +14,7 @@ module Sync_FIFO #(
     );
 
     reg [POINTER_WIDTH-1:0] head, tail;
-    reg [DATA_WIDTH:0] fifo_memory[FIFO_DEPTH-1:0];
+    reg [DATA_WIDTH-1:0] fifo_memory[FIFO_DEPTH-1:0];
 
    //counter logic and flag management
     always @(posedge clk or posedge rst) 
