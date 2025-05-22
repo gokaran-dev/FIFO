@@ -40,7 +40,7 @@ The **counter** is central to managing FIFO status:
 - It decrements on a valid read operation.
 - It remains unchanged when both operations happen simultaneously or when neither is valid.
 
-This logic ensures the FIFO never overflows or underflows, while enabling concurrent read/write support when the FIFO is neither full nor empty.
+This logic ensures the FIFO never overflows or underflows, while enabling *potential* concurrent read/write support when the FIFO is neither full nor empty.
 
 #### Operation Encoding
 
