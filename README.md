@@ -1,13 +1,9 @@
 # Synchronous and Asynchronous FIFO in Verilog
 
-A Verilog-based implementation of parameterized Synchronous and Asynchronous FIFO (First In, First Out) memory buffers, suitable for use in various digital systems. Includes waveform verification and synthesized schematics.
-
 ---
 
 ## 📚 Table of Contents
 - [Overview](#overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
 - [Synchronous FIFO](#synchronous-fifo)
   - [Design Description](#design-description-sync)
   - [Waveform](#waveform-sync)
@@ -35,11 +31,23 @@ Each design is fully parameterized for:
 
 ---
 
-## ✨ Features
+### 🧠 Design Description (Synchronous FIFO) <a name="design-description-sync"></a>
 
-- Fully parameterized
-- Synchronous and asynchronous support
-- Overflow and underflow protection
-- Proper Gray code pointer synchronization in asynchronous FIFO
-- Comprehensive testbenches
-- Synthesizable and simulation-ready
+The **Synchronous FIFO** operates entirely within a single clock domain and uses a circular buffer structure. It consists of a memory array, two pointers (`read_ptr` and `write_ptr`), and a **counter** that tracks how many data entries are currently stored in the FIFO.
+
+The **counter** is central to managing FIFO status:
+- It increments on a valid write operation.
+- It decrements on a valid read operation.
+- It remains unchanged when both operations happen simultaneously or when neither is valid.
+
+This logic ensures the FIFO never overflows or underflows, while enabling concurrent read/write support when the FIFO is neither full nor empty.
+
+#### Operation Encoding
+
+| `write_en` | `fifo_full` | `read_en` | `fifo_empty` | Vector | Interpretation                             |
+|------------|-------------|-----------|--------------|--------|--------------------------------------------|
+| 1          | 0           | 0         | X            | 2'b10  | Write only (counter increments)            |
+| 0          | X           | 1         | 0            | 2'b01  | Read only (counter decrements)             |
+| 1          | 0           | 1         | 0            | 2'b11  | Write + Read (counter remains the same)    |
+| Any        | 1           | Any       | 1            | 2'b00  | No valid operation (counter unchanged)     |
+
