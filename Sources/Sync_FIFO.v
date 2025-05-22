@@ -5,15 +5,15 @@ module Sync_FIFO #(
         parameter FIFO_DEPTH=16,
         parameter POINTER_WIDTH=$clog2(FIFO_DEPTH)
     )(  
-    input wire clk, rst,
-    input wire write_en, read_en,
-    input wire [DATA_WIDTH-1:0] data_in,
-    output reg [DATA_WIDTH-1:0] data_out,
-    output reg [POINTER_WIDTH:0] data_counter, //from 0 to 16
-    output reg fifo_empty, fifo_full
+    input clk,rst,
+    input write_en, read_en,
+    input [DATA_WIDTH-1:0]data_in,
+    output reg [DATA_WIDTH-1:0]data_out,
+    output reg [POINTER_WIDTH:0]data_counter, //taking output only for debugging
+    output reg fifo_empty,fifo_full
     );
 
-    reg [POINTER_WIDTH-1:0] head, tail;
+    reg [POINTER_WIDTH-1:0]head, tail;
     reg [DATA_WIDTH-1:0] fifo_memory[FIFO_DEPTH-1:0];
 
    //counter logic and flag management

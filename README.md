@@ -35,7 +35,7 @@ The FIFO supports standard FIFO operations:
 
 ## Future Work
 
-- Implementation of an asynchronous FIFO to handle different clock domains.
+- Implementation of an asynchronous FIFO to handle different clock domains(Currently working on it)
 - Additional testbenches and verification.
 - Possible integration with other modules like UART.
 

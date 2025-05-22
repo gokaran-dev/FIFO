@@ -42,7 +42,7 @@ module Sync_FIFO_TB();
         #12 rst=0;
         #10;
 
-      //pushing   
+      //writing data into FIFO  
         repeat(16)
          begin
             @(posedge clk)
@@ -57,7 +57,7 @@ module Sync_FIFO_TB();
 
         #20;
 
-      //poping
+      //fetching data from FIFO
         repeat(16) 
           begin
             @(posedge clk)
