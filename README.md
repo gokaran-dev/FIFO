@@ -51,3 +51,21 @@ This logic ensures the FIFO never overflows or underflows, while enabling *poten
 | 1          | 0           | 1         | 0            | 2'b11  | Write + Read (counter remains the same)    |
 | Any        | 1           | Any       | 1            | 2'b00  | No valid operation (counter unchanged)     |
 
+---
+
+### 📈 Waveform <a name="waveform-sync"></a>
+
+Below is the simulation waveform for the Synchronous FIFO. It demonstrates:
+- Sequential writes until the FIFO is full
+- Valid read operations after writes
+- Correct operation of the `fifo_full` and `fifo_empty` flags
+
+![Synchronous FIFO Waveform](results/sync_fifo_output.png)
+
+---
+
+### 🏗️ Synthesized Schematic <a name="synthesized-schematic-sync"></a>
+
+This schematic is generated after synthesis using Vivado, showcasing the overall structure of the synchronous FIFO logic.
+
+![Synchronous FIFO Synthesized Schematic](results/synthesized_schematic_sync.png)
