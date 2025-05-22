@@ -12,10 +12,8 @@
   - [Design Description](#design-description-async)
   - [Waveform](#waveform-async)
   - [Synthesized Schematic](#synthesized-schematic-async)
-- [Testbench Strategy](#testbench-strategy)
-- [Simulation and Synthesis Tools](#simulation-and-synthesis-tools)
-- [How to Run](#how-to-run)
-- [Author](#author)
+- [References](#references)
+- [Notes](#notes)
 
 ---
 
@@ -143,4 +141,28 @@ The schematic below is generated post-synthesis using Vivado. It visualizes the 
 
 ![Asynchronous FIFO Synthesized Schematic](results/synthesized_schematic_async.png)
 
+---
+
+## References <a name="references"></a>
+
+- [Asynchronous FIFO GitHub Repository by Jonathan Jing](https://github.com/JonathanJing/Asynchronous-FIFO/tree/master)  
+  This repository provided helpful design patterns and verification insights for asynchronous FIFO implementation.
+
+- [YouTube Video: Asynchronous FIFO - How It Works](https://www.youtube.com/watch?v=0LVHPRmi88c&t=224s)  
+  A concise and clear video explaining the logic behind asynchronous FIFOs and the importance of pointer synchronization.
+
+- **ChatGPT Assistance**  
+  An initial skeleton testbench for both FIFO types was generated using ChatGPT. It was then customized and extended with specific corner case tests and concurrent read/write scenarios to enhance robustness and realism in simulation.
+
+---
+
+## ✅ Final Notes
+
+- Both designs are fully **synthesizable** and **implementation-ready**, having been tested in Vivado for logic synthesis and RTL schematic generation.
+
+Future testing of the Asynchronous FIFO will include:
+- **Timing analysis** across clock domains
+- Potential integration into larger digital subsystems involving real clock crossing (e.g., AXI stream interfaces or custom SoCs)
+
+These designs provide a reusable and adaptable foundation for FIFO-based buffering and data-handling architectures in FPGA and ASIC development.
 
