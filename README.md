@@ -112,5 +112,35 @@ To manage the complexities of asynchronous operation, the design is modularized 
    - Used to safely transfer the Gray-coded pointers between clock domains.  
    - Implemented as **two-stage flip-flop synchronizers** to ensure timing closure and CDC safety.
 
+---
+
+### Waveform <a name="waveform-async"></a>
+
+#### 1. Normal FIFO Operation
+The waveform below shows the FIFO being written to until it is full, followed by a sequence of reads after a short delay.  
+It verifies:
+- Correct assertion of `fifo_full` and `fifo_empty` flags
+- Valid data output during reads
+- Proper synchronization across two clock domains
+
+![Async FIFO Normal Operation](results/async_fifo_output_1.png)
+
+---
+
+#### 2. Concurrent Read and Write
+This waveform demonstrates simultaneous read and write operations, the primary benefit of asynchronous FIFOs.  
+It verifies:
+- Concurrent activity in both domains without conflict
+- Accurate data handling and FIFO status updates
+
+![Async FIFO Concurrent Read/Write](results/async_fifo_output_2.png)
+
+---
+
+### Synthesized Schematic <a name="synthesized-schematic-async"></a>
+
+The schematic below is generated post-synthesis using Vivado. It visualizes the key modules involved in the design:
+
+![Asynchronous FIFO Synthesized Schematic](results/synthesized_schematic_async.png)
 
 
