@@ -6,14 +6,14 @@ module Write_Controller #(
     input clk_wr,
     input rst,
     input write_en,
-    input [POINTER_WIDTH:0] rqs_read_ptr,  // Gray-coded from read domain
-    output [POINTER_WIDTH:0] write_ptr,    // Gray-coded write pointer (to send to read domain)
+    input [POINTER_WIDTH:0]rqs_read_ptr,  //gray coded read pointer, CDC signal
+    output [POINTER_WIDTH:0]write_ptr,    //gray coded write pointer, CDC signal meant to be sent
     output fifo_full,
-    output reg [POINTER_WIDTH-1:0] write_addr   // Binary address to memory  
+    output reg[POINTER_WIDTH-1:0]write_addr   //Binary address to FIFO memory  
     );
 
-    reg [POINTER_WIDTH:0] write_bin;
-    wire [POINTER_WIDTH:0] read_bin;
+    reg [POINTER_WIDTH:0]write_bin;
+    wire [POINTER_WIDTH:0]read_bin;
 
     // Decode read pointer received from read domain
     Binary_Gray_Decoder #(.WIDTH(POINTER_WIDTH)) 
@@ -22,7 +22,10 @@ module Write_Controller #(
         .bin(read_bin)
       );
 
-    // Full flag logic
+    /*computing fifo_full logic using wrap around condition. We are comparing if the location we are writing at next,
+    is equal to the location we are reading from. In that case, fifo_empty can also be true. This is where the 5th bit(MSB) becomes useful.
+    if MSB is 1, we can be sure FIFO has been written once, in that case, fifo will be full, and not empty*/
+    
     wire [POINTER_WIDTH:0] next_write_bin=write_bin+1;
     assign fifo_full=(next_write_bin[POINTER_WIDTH:0]=={~read_bin[POINTER_WIDTH],read_bin[POINTER_WIDTH-1:0]});
 
@@ -36,10 +39,11 @@ module Write_Controller #(
         
         else 
           begin
+            //making sure we use the previous address first, before incrementing. Fixes Timing issues.
+            write_addr<=write_bin[POINTER_WIDTH-1:0]; 
             if(write_en && !fifo_full) 
               begin
-                write_addr<=write_bin[POINTER_WIDTH-1:0];
-                write_bin<=write_bin+1;
+                write_bin<=write_bin+1; //after writing, we move to next location
               end 
           end
       end
