@@ -91,9 +91,10 @@ Unlike a synchronous FIFO that shares a single clock, the asynchronous FIFO acce
 
 To manage the complexities of asynchronous operation, the design is modularized into several functional blocks:
 
-1. **Dual-Port Memory Buffer**  
+1. **Async_FIFO(Top Module)**  
    - A register array used as shared memory for data storage.  
    - Can be accessed concurrently for reading and writing.
+   - Responsible for wiring all the submodules.  
 
 2. **Write Controller**  
    - Operates in the `write_clk` domain.  
@@ -107,7 +108,7 @@ To manage the complexities of asynchronous operation, the design is modularized 
    - Both read and write pointers are **converted to Gray code** before crossing domains.  
    - Gray coding ensures that only one bit changes at a time, minimizing the chance of metastability.
 
-5. **Pointer Synchronizers**  
+5. **Synchronizers**  
    - Used to safely transfer the Gray-coded pointers between clock domains.  
    - Implemented as **two-stage flip-flop synchronizers** to ensure timing closure and CDC safety.
 
