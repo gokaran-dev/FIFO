@@ -121,7 +121,7 @@ It verifies:
 - Valid data output during reads
 - Proper synchronization across two clock domains
 
-![Async FIFO Normal Operation](results/async_fifo_output_1.png)
+![Async FIFO Normal Operation](results/async_FIFO_output_1.png)
 
 ---
 
@@ -131,7 +131,7 @@ It verifies:
 - Concurrent activity in both domains without conflict
 - Accurate data handling and FIFO status updates
 
-![Async FIFO Concurrent Read/Write](results/async_fifo_output_2.png)
+![Async FIFO Concurrent Read/Write](results/async_FIFO_output_2.png)
 
 ---
 
