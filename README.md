@@ -152,7 +152,7 @@ The schematic below is generated post-synthesis using Vivado. It visualizes the 
   A concise and clear video explaining the logic behind asynchronous FIFOs and the importance of pointer synchronization.
 
 - **ChatGPT Assistance**  
-  An initial skeleton testbench for both FIFO types was generated using ChatGPT. It was then customized and extended with specific corner case tests and concurrent read/write scenarios to enhance robustness and realism in simulation.
+  An initial skeleton testbench for Async FIFO was generated using ChatGPT. 
 
 ---
 
